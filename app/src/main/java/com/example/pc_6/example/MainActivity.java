@@ -13,8 +13,10 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.pc_6.example.Adapter.AdapterUser;
 import com.example.pc_6.example.Adapter.PostAdapter;
 import com.example.pc_6.example.Models.Post;
+import com.example.pc_6.example.Models.Usuarios;
 import com.example.pc_6.example.Parser.JsonParser;
 
 import java.io.IOException;
@@ -23,8 +25,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     ProgressBar cargador;
-    List<Post> myPost;
-    PostAdapter adapter;
+    List<Usuarios> myPost;
+    AdapterUser adapter;
     RecyclerView recyclerView;
     Button boton;
 
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void cargarDatos(){
         // Crear un objeto de tipo "PostAdapter" y retorna el item de mi layout (item.xml)
-        adapter = new PostAdapter(getApplicationContext(), myPost);
+        adapter = new AdapterUser(getApplicationContext(), myPost);
         // inyectar el item en mi RecyclerView
         recyclerView.setAdapter(adapter);
     }
@@ -60,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     public void onClickButton(View view){
         if (isOnLine()){
             MyTask task = new MyTask();
-            task.execute("https://jsonplaceholder.typicode.com/posts");
+            task.execute("https://jsonplaceholder.typicode.com/users");
         }else {
             Toast.makeText(this, "Sin conexión", Toast.LENGTH_SHORT).show();
         }
